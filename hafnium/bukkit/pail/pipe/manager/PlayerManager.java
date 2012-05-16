@@ -52,8 +52,9 @@ public class PlayerManager implements Listener {
 		VIPList list = this.plugin.getVipList();
 		if (list.hasNoteableRole(event.getPlayer().getName())) {
 			Role role = list.getBestRole(event.getPlayer().getName());
-			this.plugin.getLogger().info(
-					event.getPlayer().getName() + " is " + (role.isPlural() ? "a" : "the") + " " + role.getCleanName() + " for this project.");
+			if (PailPipe.getInstance().getConfig().getInt("filter-level") >= 2)
+				this.plugin.getLogger().info(
+						event.getPlayer().getName() + " is " + (role.isPlural() ? "a" : "the") + " " + role.getCleanName() + " for this project.");
 		}
 	}
 
@@ -118,7 +119,8 @@ public class PlayerManager implements Listener {
 
 		for (PailPlayer p : expired) {
 			this.players.remove(p);
-			PailPipe.getInstance().getLogger().info("Removed player manager for " + p.getPlayer().getName() + ".");
+			if (PailPipe.getInstance().getConfig().getInt("filter-level") >= 3)
+				PailPipe.getInstance().getLogger().info("Removed player manager for " + p.getPlayer().getName() + ".");
 		}
 	}
 }

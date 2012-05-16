@@ -46,7 +46,8 @@ public class PailPlayer {
 
 		this.altCoord = false;
 
-		PailPipe.getInstance().getLogger().info("Created player manager for " + p.getName() + ".");
+		if (PailPipe.getInstance().getConfig().getInt("filter-level") >= 3)
+			PailPipe.getInstance().getLogger().info("Created player manager for " + p.getName() + ".");
 	}
 
 	public PailPlayer(String playerName) {
